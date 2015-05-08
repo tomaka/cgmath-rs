@@ -269,6 +269,21 @@ macro_rules! vec(
             }
         }
 
+        impl<$S> From<[$S; $n]> for $Self_<$S> {
+            #[inline]
+            fn from(_v: [$S; $n]) -> $Self_<$S> {
+                // match v { [$($field),+] => $Self { $($field: $field),+ } }
+                panic!("Unimplemented, pending a fix for rust-lang/rust#16418");
+            }
+        }
+
+        impl<$S> Into<[$S; $n]> for $Self_<$S> {
+            #[inline]
+            fn into(self) -> [$S; $n] {
+                match self { $Self_ { $($field),+ } => [$($field),+] }
+            }
+        }
+
         impl<$S: Copy> Index<usize> for $Self_<$S> {
             type Output = S;
 

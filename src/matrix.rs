@@ -600,6 +600,31 @@ impl<S> FixedArray<[[S; 2]; 2]> for Matrix2<S> {
     }
 }
 
+impl<S> From<[[S; 2]; 2]> for Matrix2<S> {
+    #[inline]
+    fn from(_v: [[S; 2]; 2]) -> Matrix2<S> {
+        // match v {
+        //     [x, y] => Matrix2 {
+        //         x: FixedArray::from_fixed(x),
+        //         y: FixedArray::from_fixed(y),
+        //     },
+        // }
+        panic!("Unimplemented, pending a fix for rust-lang/rust#16418");
+    }
+}
+
+impl<S> Into<[[S; 2]; 2]> for Matrix2<S> {
+    #[inline]
+    fn into(self) -> [[S; 2]; 2] {
+        match self {
+            Matrix2 { x, y } => [
+                x.into_fixed(),
+                y.into_fixed(),
+            ],
+        }
+    }
+}
+
 impl<S> Index<usize> for Matrix2<S> {
     type Output =  Vector2<S>;
 
@@ -679,6 +704,33 @@ impl<S> FixedArray<[[S; 3]; 3]> for Matrix3<S> {
     #[inline]
     fn from_fixed_mut<'a>(v: &'a mut [[S; 3]; 3]) -> &'a mut Matrix3<S> {
         unsafe { mem::transmute(v) }
+    }
+}
+
+impl<S> From<[[S; 3]; 3]> for Matrix3<S> {
+    #[inline]
+    fn from(_v: [[S; 3]; 3]) -> Matrix3<S> {
+        // match v {
+        //     [x, y, z] => Matrix3 {
+        //         x: FixedArray::from_fixed(x),
+        //         y: FixedArray::from_fixed(y),
+        //         z: FixedArray::from_fixed(z),
+        //     },
+        // }
+        panic!("Unimplemented, pending a fix for rust-lang/rust#16418")
+    }
+}
+
+impl<S> Into<[[S; 3]; 3]> for Matrix3<S> {
+    #[inline]
+    fn into(self) -> [[S; 3]; 3] {
+        match self {
+            Matrix3 { x, y, z } => [
+                x.into_fixed(),
+                y.into_fixed(),
+                z.into_fixed(),
+            ],
+        }
     }
 }
 
@@ -766,6 +818,35 @@ impl<S> FixedArray<[[S; 4]; 4]> for Matrix4<S> {
     #[inline]
     fn from_fixed_mut<'a>(v: &'a mut [[S; 4]; 4]) -> &'a mut Matrix4<S> {
         unsafe { mem::transmute(v) }
+    }
+}
+
+impl<S> From<[[S; 4]; 4]> for Matrix4<S> {
+    #[inline]
+    fn from(_v: [[S; 4]; 4]) -> Matrix4<S> {
+        // match v {
+        //     [x, y, z, w] => Matrix4 {
+        //         x: FixedArray::from_fixed(x),
+        //         y: FixedArray::from_fixed(y),
+        //         z: FixedArray::from_fixed(z),
+        //         w: FixedArray::from_fixed(w),
+        //     },
+        // }
+        panic!("Unimplemented, pending a fix for rust-lang/rust#16418")
+    }
+}
+
+impl<S> Into<[[S; 4]; 4]> for Matrix4<S> {
+    #[inline]
+    fn into(self) -> [[S; 4]; 4] {
+        match self {
+            Matrix4 { x, y, z, w } => [
+                x.into_fixed(),
+                y.into_fixed(),
+                z.into_fixed(),
+                w.into_fixed(),
+            ],
+        }
     }
 }
 
